@@ -12,6 +12,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
+/*
+ Developed and created by Micah
+ */
+
 public final class SkyRanks extends JavaPlugin {
 
     //instances
