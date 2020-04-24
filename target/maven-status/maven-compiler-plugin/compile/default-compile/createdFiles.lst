@@ -1,0 +1,10 @@
+dev\micah\rank\Rank.class
+dev\micah\SkyRanks.class
+dev\micah\utils\Chat.class
+dev\micah\io\FileManager.class
+dev\micah\listeners\JoinListener.class
+dev\micah\utils\CommandUtil.class
+dev\micah\command\SkyRanksGUI.class
+dev\micah\listeners\ChatListener.class
+dev\micah\utils\PlayerUtil.class
+dev\micah\command\SkyRanksCommand.class

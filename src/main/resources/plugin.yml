@@ -1,0 +1,7 @@
+name: SkyRanks
+version: 1.0
+main: dev.micah.SkyRanks
+commands:
+  skyranks:
+    description: The main SkyRanks command
+    aliases: [sr, skyr, sranks]

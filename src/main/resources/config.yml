@@ -1,0 +1,13 @@
+#################################################
+#                                               #
+#            Thanks for downloading!            #
+#       Feel free to donate if you enjoy!       #
+#           https://paypal.me/dvs43             #
+#                                               #
+#################################################
+
+# Loads the default settings for all the ranks and configs, this will erase
+# all your current data! Be careful with this. (Sets to false after you start
+# the plugin for the first time!)
+
+load-defaults: true

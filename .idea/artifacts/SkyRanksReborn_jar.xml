@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SkyRanksReborn:jar">
+    <output-path>$USER_HOME$/OneDrive/Desktop/My Server/plugins</output-path>
+    <root id="archive" name="SkyRanksReborn.jar">
+      <element id="module-output" name="SkyRanksReborn" />
+    </root>
+  </artifact>
+</component>
