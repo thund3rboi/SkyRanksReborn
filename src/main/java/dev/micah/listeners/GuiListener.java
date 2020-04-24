@@ -41,6 +41,11 @@ public class GuiListener implements Listener {
         if (e.getInventory().getTitle().equals(Chat.color("&c&lSKYRANKS - Editor"))) {
             String rank = ChatColor.stripColor(e.getInventory().getItem(0).getItemMeta().getDisplayName());
             if (item != null && item.getType() != null) {
+                if (item.getType() == Material.LAVA_BUCKET) {
+                    Rank.deleteRank(rank);
+                    p.closeInventory();
+                    new PlayerUtil(p).sendMessage("&cYou deleted the rank &7" + rank);
+                }
                 if (item.getType() == Material.BARRIER) {
                     new GuiRanks(p, GuiEditor.getPageComingFrom().get(p));
                 }
