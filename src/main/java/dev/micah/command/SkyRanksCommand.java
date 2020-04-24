@@ -81,8 +81,35 @@ public class SkyRanksCommand implements CommandExecutor {
         }
 
         //console
-
+        if (!(sender instanceof Player)) {
+            if (args.length <= 0) {
+                info("Invalid usage! Use /sr help for commands");
+            }
+            if (args.length >= 1) {
+                if (args[0].equalsIgnoreCase("help")) {
+                    info("SKYRANKS CONSOLE COMMANDS:");
+                    info("- sr help - Shows this page");
+                    info("- sr setrank <player> <rank> - Sets a players rank");
+                    info("- sr list - Gives a list of ranks");
+                }
+                if (args[0].equalsIgnoreCase("setrank")) {
+                    if (Rank.exists(args[2])) {
+                        SkyRanks.getDataFile().set("player." + args[1], args[2]);
+                        info(args[1] + "'s rank has been set to " + args[2]);
+                    } else {
+                        info("Rank does not exist!");
+                    }
+                }
+                if (args[0].equalsIgnoreCase("list")) {
+                    info("Ranks (" + ranks.size() + "): " + ranks.toString().replace("[", "").replace("]", ""));
+                }
+            }
+        }
         return false;
+    }
+
+    void info(String message) {
+        Bukkit.getLogger().info(message);
     }
 
 }
