@@ -5,6 +5,7 @@ import dev.micah.gui.impl.GuiEditor;
 import dev.micah.gui.impl.GuiRanks;
 import dev.micah.gui.impl.GuiSetRank;
 import dev.micah.rank.Rank;
+import dev.micah.utils.Chat;
 import dev.micah.utils.CommandUtil;
 import dev.micah.utils.PlayerUtil;
 import org.bukkit.Bukkit;
@@ -38,6 +39,14 @@ public class SkyRanksCommand implements CommandExecutor {
             }
 
             if (args.length >= 1) {
+                if (CommandUtil.hasAll(p, args, 0, "help", "skyranks.help")) {
+                    p.getPlayer().sendMessage(Chat.color("&7--[ &cX &7]-- &c&lSKYRANKS &7--[ &cX &7]--"));
+                    p.getPlayer().sendMessage(" ");
+                    p.getPlayer().sendMessage(Chat.color("&c- &7/skyranks setrank <player> - Sets a players rank"));
+                    p.getPlayer().sendMessage(Chat.color("&c- &7/skyranks create <rank> - Creates a new rank"));
+                    p.getPlayer().sendMessage(Chat.color("&c- &7/skyranks gui - Opens up the rank gui"));
+                    p.getPlayer().sendMessage(" ");
+                }
                 if (CommandUtil.hasAll(p, args, 0, "create", "skyranks.admin.create")) {
                     String rankToCreate = args[1];
                     if (Rank.exists(rankToCreate)) {
