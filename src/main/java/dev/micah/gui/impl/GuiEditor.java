@@ -1,5 +1,6 @@
 package dev.micah.gui.impl;
 
+import dev.micah.gui.Gui;
 import dev.micah.rank.Rank;
 import dev.micah.utils.Chat;
 import org.bukkit.Bukkit;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GuiEditor {
+public class GuiEditor extends Gui {
 
     private Player player;
     private String rank;
@@ -25,7 +26,7 @@ public class GuiEditor {
         this.rank = rank;
         this.pageComingFrom = new HashMap<>();
         this.gui = Bukkit.createInventory(null, 36, Chat.color("&c&lSKYRANKS - Editor"));
-        this.setOuterBorder();
+        this.setOuterBorder(gui);
         this.pageComingFrom.put(player, pageComingFrom);
         gui.setItem(0, createRankItem(rank));
         setEditorItems();
@@ -39,39 +40,6 @@ public class GuiEditor {
         gui.setItem(20, build("&cEdit Chat Color", Material.EMERALD));
         gui.setItem(25, build("&c&lDELETE RANK", Material.LAVA_BUCKET));
         gui.setItem(35, build("&cBack", Material.BARRIER));
-    }
-
-    private void setOuterBorder() {
-        gui.setItem(0, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(1, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(2, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(3, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(4, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(5, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(6, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(7, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(8, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(9, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(17, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(18, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(26, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(27, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(28, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(29, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(30, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(31, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(32, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(33, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(34, build(" ", Material.STAINED_GLASS_PANE));
-        gui.setItem(35, build(" ", Material.STAINED_GLASS_PANE));
-    }
-
-    private ItemStack build(String name, Material material) {
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(Chat.color(name));
-        item.setItemMeta(meta);
-        return item;
     }
 
     private ItemStack createRankItem(String rank) {

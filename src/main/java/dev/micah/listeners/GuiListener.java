@@ -91,54 +91,22 @@ public class GuiListener implements Listener {
 
     public String getColorCodeFromClickedItem(ItemStack itemIn) {
         String s = itemIn.getItemMeta().getDisplayName();
-        if (s.contains("RED") && !(s.contains("DARK"))) {
-            return "&c";
-        }
-        if (s.contains("DARK RED")) {
-            return "&4";
-        }
-        if (s.contains("BLUE") && !(s.contains("DARK"))) {
-            return "&9";
-        }
-        if (s.contains("DARK BLUE")) {
-            return "&1";
-        }
-        if (s.contains("AQUA") && !(s.contains("DARK"))) {
-            return "&b";
-        }
-        if (s.contains("WHITE")) {
-            return "&f";
-        }
-        if (s.contains("GRAY") && !(s.contains("DARK"))) {
-            return "&7";
-        }
-        if (s.contains("DARK GRAY")) {
-            return "&8";
-        }
-        if (s.contains("BLACK")) {
-            return "&0";
-        }
-        if (s.contains("PURPLE") && !(s.contains("DARK"))) {
-            return "&d";
-        }
-        if (s.contains("DARK PURPLE")) {
-            return "&5";
-        }
-        if (s.contains("GOLD")) {
-            return "&6";
-        }
-        if (s.contains("DARK GREEN")) {
-            return "&2";
-        }
-        if (s.contains("GREEN") && !(s.contains("DARK"))) {
-            return "&a";
-        }
-        if (s.contains("YELLOW")) {
-            return "&e";
-        }
-        if (s.contains("DARK AQUA")) {
-            return "&3";
-        }
+        if (s.contains("RED") && !(s.contains("DARK"))) { return "&c"; }
+        if (s.contains("DARK RED")) { return "&4"; }
+        if (s.contains("BLUE") && !(s.contains("DARK"))) { return "&9"; }
+        if (s.contains("DARK BLUE")) { return "&1"; }
+        if (s.contains("AQUA") && !(s.contains("DARK"))) { return "&b"; }
+        if (s.contains("WHITE")) { return "&f"; }
+        if (s.contains("GRAY") && !(s.contains("DARK"))) { return "&7"; }
+        if (s.contains("DARK GRAY")) { return "&8"; }
+        if (s.contains("BLACK")) { return "&0"; }
+        if (s.contains("PURPLE") && !(s.contains("DARK"))) { return "&d"; }
+        if (s.contains("DARK PURPLE")) { return "&5"; }
+        if (s.contains("GOLD")) { return "&6"; }
+        if (s.contains("DARK GREEN")) { return "&2"; }
+        if (s.contains("GREEN") && !(s.contains("DARK"))) { return "&a"; }
+        if (s.contains("YELLOW")) { return "&e"; }
+        if (s.contains("DARK AQUA")) { return "&3"; }
         return "&r";
     }
 

@@ -15,21 +15,18 @@ public class VanishCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if (!(sender instanceof Player)) {
             Bukkit.getLogger().info("You cannot run this through console!");
         }
         if (sender instanceof Player) {
             Player p = (Player) sender;
             boolean vanished = vanishedList.contains(p);
-            if (vanished) {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.showPlayer(p);
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                if (vanished) {
+                    all.showPlayer(p);
                     vanishedList.remove(p);
-                }
-            } else {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.hidePlayer(p);
+                } else {
+                    all.hidePlayer(p);
                     vanishedList.add(p);
                 }
             }
@@ -37,7 +34,6 @@ public class VanishCommand implements CommandExecutor {
         return false;
     }
 
-    public static List<Player> getVanishedList() {
-        return vanishedList;
-    }
+    public static List<Player> getVanishedList() { return vanishedList; }
+
 }

@@ -1,5 +1,6 @@
 package dev.micah.gui.impl;
 
+import dev.micah.gui.Gui;
 import dev.micah.rank.Rank;
 import dev.micah.utils.Chat;
 import org.bukkit.Bukkit;
@@ -10,10 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class GuiColorSelector {
+public class GuiColorSelector extends Gui {
 
     private Inventory gui;
     private Player player;
@@ -95,14 +95,6 @@ public class GuiColorSelector {
         gui.setItem(42, build(" ", Material.STAINED_GLASS_PANE));
         gui.setItem(43, build(" ", Material.STAINED_GLASS_PANE));
         gui.setItem(44, build(" ", Material.STAINED_GLASS_PANE));
-    }
-
-    private ItemStack build(String name, Material material) {
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(Chat.color(name));
-        item.setItemMeta(meta);
-        return item;
     }
 
     public enum ColorSelectorType {

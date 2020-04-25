@@ -1,14 +1,10 @@
 package dev.micah.rank;
 
 import dev.micah.SkyRanks;
-import dev.micah.utils.Chat;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Rank {

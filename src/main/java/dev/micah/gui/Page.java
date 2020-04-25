@@ -10,7 +10,6 @@ public class Page {
     public static List<ItemStack> getPageItems(List<ItemStack> items, int page, int spaces) {
         int upper = page * spaces;
         int lower = upper - spaces;
-
         List<ItemStack> newList = new ArrayList<>();
         for (int i = lower; i < upper; i++) {
             if (i >= items.size()) {
@@ -22,13 +21,9 @@ public class Page {
     }
 
     public static boolean isPageValid(List<ItemStack> items, int page, int spaces) {
-        if (page <= 0) {
-            return false;
-        }
-
+        if (page <= 0) { return false; }
         int upper = page * spaces;
         int lower = upper - spaces;
-
         return items.size() > lower;
     }
 

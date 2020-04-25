@@ -17,7 +17,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.UUID;
 
 public class SkyRanksCommand implements CommandExecutor {
 
@@ -28,7 +27,6 @@ public class SkyRanksCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        //player
         if (sender instanceof Player) {
             Player playerIn = (Player) sender;
             PlayerUtil p = new PlayerUtil(playerIn);
@@ -79,8 +77,6 @@ public class SkyRanksCommand implements CommandExecutor {
                 p.sendMessage("Invalid usage! Use /sr help for a list of commands");
             }
         }
-
-        //console
         if (!(sender instanceof Player)) {
             if (args.length <= 0) {
                 info("Invalid usage! Use /sr help for commands");
@@ -108,8 +104,6 @@ public class SkyRanksCommand implements CommandExecutor {
         return false;
     }
 
-    void info(String message) {
-        Bukkit.getLogger().info(message);
-    }
+    void info(String message) { Bukkit.getLogger().info(message); }
 
 }

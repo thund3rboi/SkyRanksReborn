@@ -26,17 +26,14 @@ public class ConversationHandler {
 }
 
 class PrefixA extends StringPrompt {
-
     private String rank;
     public PrefixA(String rankIn) {
         this.rank = rankIn;
     }
-
     @Override
     public String getPromptText(ConversationContext context) {
         return Chat.color("&cPlease type the new prefix for " + rank + "...");
     }
-
     @Override
     public Prompt acceptInput(ConversationContext context, String input) {
         context.getForWhom().sendRawMessage(Chat.color("&c" + rank + "'s prefix has been changed to &r" + input));
@@ -47,17 +44,14 @@ class PrefixA extends StringPrompt {
 }
 
 class SuffixA extends StringPrompt {
-
     private String rank;
     public SuffixA(String rankIn) {
         this.rank = rankIn;
     }
-
     @Override
     public String getPromptText(ConversationContext context) {
         return Chat.color("&cPlease type the new suffix for " + rank + "...");
     }
-
     @Override
     public Prompt acceptInput(ConversationContext context, String input) {
         context.getForWhom().sendRawMessage(Chat.color("&c" + rank + "'s suffix has been changed to &r" + input));

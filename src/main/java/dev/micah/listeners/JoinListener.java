@@ -11,9 +11,8 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        String defaultRank = SkyRanks.getDataFile().getString("ranks.default");
         if (SkyRanks.getDataFile().getString("player." + p.getName()) == null) {
-            SkyRanks.getDataFile().set("player." + p.getName(), defaultRank);
+            SkyRanks.getDataFile().set("player." + p.getName(), SkyRanks.getDataFile().getString("ranks.default"));
         }
     }
 

@@ -9,7 +9,6 @@ import dev.micah.listeners.JoinListener;
 import dev.micah.runnable.TablistRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -24,31 +23,34 @@ public final class SkyRanks extends JavaPlugin {
     //instances
     private static SkyRanks instance;
     private FileManager fileManager;
-
-    //files
+    private YamlConfiguration config;
     private File dataFile;
 
-    //data file
-    private YamlConfiguration config;
 
     @Override
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
+        /** File Management Init **/
         dataFile = new File(Bukkit.getPluginManager().getPlugin("SkyRanks").getDataFolder(), "data.yml");
         fileManager = new FileManager(dataFile, "data");
         fileManager.init();
         config = YamlConfiguration.loadConfiguration(fileManager.getFile());
-        instance = this;
+        /** Commands **/
         this.getCommand("skyranks").setExecutor(new SkyRanksCommand());
         this.getCommand("vanish").setExecutor(new VanishCommand());
+        /** Events **/
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
+        /** Runnables **/
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new TablistRunnable(), 1L, 1L);
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+        instance = null;
+    }
 
     public static SkyRanks getInstance() {
         return instance;
