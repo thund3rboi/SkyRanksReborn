@@ -105,10 +105,8 @@ public class Rank {
     }
 
     public static void setRank(Player p, String rankName) {
-        if (conf == null) {
-            conf = SkyRanks.getDataFile();
-        }
         conf.set("player." + p.getName(), rankName);
+        plugin.save();
     }
 
 }

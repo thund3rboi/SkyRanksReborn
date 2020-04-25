@@ -5,3 +5,6 @@ commands:
   skyranks:
     description: The main SkyRanks command
     aliases: [sr, skyr, sranks]
+  vanish:
+    description: Vanish command built into SkyRanks
+    aliases: [v, dissapear, hide]
