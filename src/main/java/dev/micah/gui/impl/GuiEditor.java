@@ -1,5 +1,6 @@
 package dev.micah.gui.impl;
 
+import dev.micah.SkyRanks;
 import dev.micah.gui.Gui;
 import dev.micah.rank.Rank;
 import dev.micah.utils.Chat;
@@ -39,6 +40,9 @@ public class GuiEditor extends Gui {
         gui.setItem(11, build("&cEdit Name Color", Material.EMERALD));
         gui.setItem(20, build("&cEdit Chat Color", Material.EMERALD));
         gui.setItem(25, build("&c&lDELETE RANK", Material.LAVA_BUCKET));
+        gui.setItem(12, build("&cAdd Permission", Material.ANVIL));
+        gui.setItem(21, build("&cRemove Permission", Material.ANVIL));
+        gui.setItem(gui.firstEmpty(), build("&cMake Default", Material.IRON_INGOT));
         gui.setItem(35, build("&cBack", Material.BARRIER));
     }
 
@@ -53,6 +57,9 @@ public class GuiEditor extends Gui {
         lore.add(Chat.color("&c- &7Suffix: &r" + (Rank.getSuffix(rank) == null ? "&fNONE" : Rank.getSuffix(rank))));
         lore.add(Chat.color("&c- &7Chat Color: &r" + Rank.getChatColor(rank) + "THIS"));
         lore.add(Chat.color("&c- &7Name Color: &r" + Rank.getNameColor(rank) + "THIS"));
+        if (SkyRanks.getDataFile().getString("ranks.default").equals(rank)) {
+            lore.add(Chat.color("&cThis is the default rank"));
+        }
         lore.add("  ");
         lore.add(Chat.color("&7You are currently editing this rank..."));
         meta.setLore(lore);

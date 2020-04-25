@@ -3,6 +3,7 @@ package dev.micah.conversation;
 import dev.micah.SkyRanks;
 import dev.micah.gui.impl.GuiEditor;
 import dev.micah.rank.Rank;
+import dev.micah.runnable.PermissionCheckRunnable;
 import dev.micah.utils.Chat;
 import org.bukkit.conversations.*;
 import org.bukkit.entity.Player;
@@ -20,6 +21,20 @@ public class ConversationHandler {
         p.closeInventory();
         ConversationFactory factory = new ConversationFactory(SkyRanks.getInstance());
         Conversation conversation = factory.withFirstPrompt(new SuffixA(rankEditing)).withLocalEcho(false).buildConversation(p);
+        conversation.begin();
+    }
+
+    public static void startConversationAddPermission(Player p, String rankEditing) {
+        p.closeInventory();
+        ConversationFactory factory = new ConversationFactory(SkyRanks.getInstance());
+        Conversation conversation = factory.withFirstPrompt(new PermissionAddA(rankEditing)).withLocalEcho(false).buildConversation(p);
+        conversation.begin();
+    }
+
+    public static void startConversationRemovePermission(Player p, String rankEditing) {
+        p.closeInventory();
+        ConversationFactory factory = new ConversationFactory(SkyRanks.getInstance());
+        Conversation conversation = factory.withFirstPrompt(new PermissionRemoveA(rankEditing)).withLocalEcho(false).buildConversation(p);
         conversation.begin();
     }
 
@@ -56,6 +71,43 @@ class SuffixA extends StringPrompt {
     public Prompt acceptInput(ConversationContext context, String input) {
         context.getForWhom().sendRawMessage(Chat.color("&c" + rank + "'s suffix has been changed to &r" + input));
         Rank.setSuffix(rank, input);
+        new GuiEditor((Player)context.getForWhom(), rank, GuiEditor.getPageComingFrom().get(context.getForWhom()));
+        return null;
+    }
+}
+
+class PermissionAddA extends StringPrompt {
+    private String rank;
+    public PermissionAddA(String rankIn) {
+        this.rank = rankIn;
+    }
+    @Override
+    public String getPromptText(ConversationContext context) {
+        return Chat.color("&cPlease type the permission you want to add for " + rank + "...");
+    }
+    @Override
+    public Prompt acceptInput(ConversationContext context, String input) {
+        context.getForWhom().sendRawMessage(Chat.color("&cAdded permission " + input + " to " + rank));
+        Rank.addPermission(rank, input);
+        new GuiEditor((Player)context.getForWhom(), rank, GuiEditor.getPageComingFrom().get(context.getForWhom()));
+        return null;
+    }
+}
+
+class PermissionRemoveA extends StringPrompt {
+    private String rank;
+    public PermissionRemoveA(String rankIn) {
+        this.rank = rankIn;
+    }
+    @Override
+    public String getPromptText(ConversationContext context) {
+        return Chat.color("&cPlease type the permission you want to remove for " + rank + "...");
+    }
+    @Override
+    public Prompt acceptInput(ConversationContext context, String input) {
+        context.getForWhom().sendRawMessage(Chat.color("&cRemoved permission " + input + " from " + rank));
+        Rank.removePermission(rank, input);
+        PermissionCheckRunnable.waitListToRemove.put(rank, input);
         new GuiEditor((Player)context.getForWhom(), rank, GuiEditor.getPageComingFrom().get(context.getForWhom()));
         return null;
     }

@@ -1,10 +1,13 @@
 package dev.micah.rank;
 
 import dev.micah.SkyRanks;
+import dev.micah.permissions.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Rank {
@@ -19,10 +22,34 @@ public class Rank {
         conf.set("ranks." + rankName + ".nameColor", "&f");
         conf.set("ranks." + rankName + ".chatColor", "&f");
         conf.set("ranks." + rankName + ".inGui", true);
+        List<String> permissionsTemp = new ArrayList<>();
+        permissionsTemp.add("skyranks.gui");
+        conf.set("ranks." + rankName + ".permissions", permissionsTemp);
         ranks.add(rankName);
         conf.set("ranks.list", ranks);
         Bukkit.getLogger().info(rankName + " was created...");
         plugin.save();
+    }
+
+    public static List<String> getPermissions(String rankName) {
+        return conf.getStringList("ranks." + rankName + ".permissions");
+    }
+
+    public static void addPermission(String rankName, String permission) {
+        List<String> perms = getPermissions(rankName);
+        perms.add(permission);
+        conf.set("ranks." + rankName + ".permissions", perms);
+        plugin.save();
+    }
+
+    public static void removePermission(String rankName, String permission) {
+
+    }
+
+    public static void loopThroughAllRanksAndAddPermissions() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            Permission.registerPermissionsToPlayerWithGroup(p, Rank.getRank(p));
+        }
     }
 
     public static void deleteRank(String rankName) {

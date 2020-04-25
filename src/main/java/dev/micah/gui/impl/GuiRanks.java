@@ -55,6 +55,9 @@ public class GuiRanks extends Gui {
         lore.add(Chat.color("&c- &7Chat Color: &r" + Rank.getChatColor(rank) + "THIS"));
         lore.add(Chat.color("&c- &7Name Color: &r" + Rank.getNameColor(rank) + "THIS"));
         if (player.hasPermission("skyranks.admin.editor")) {
+            if (SkyRanks.getDataFile().getString("ranks.default").equals(rank)) {
+                lore.add(Chat.color("&cThis is the default rank"));
+            }
             lore.add("  ");
             lore.add(Chat.color("&cShift + Click &7to edit this rank"));
         }

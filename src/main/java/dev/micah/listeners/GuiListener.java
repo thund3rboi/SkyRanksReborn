@@ -1,5 +1,6 @@
 package dev.micah.listeners;
 
+import dev.micah.SkyRanks;
 import dev.micah.conversation.ConversationHandler;
 import dev.micah.gui.impl.GuiColorSelector;
 import dev.micah.gui.impl.GuiEditor;
@@ -64,6 +65,18 @@ public class GuiListener implements Listener {
                     if (item.getItemMeta().getDisplayName().contains("Name Color")) {
                         new GuiColorSelector(p, rank, GuiColorSelector.ColorSelectorType.NAME_COLOR);
                     }
+                }
+                if (item.getType() == Material.ANVIL) {
+                    if (item.getItemMeta().getDisplayName().contains("Add Permission")) {
+                        ConversationHandler.startConversationAddPermission(p, rank);
+                    } else {
+                        ConversationHandler.startConversationRemovePermission(p, rank);
+                    }
+                }
+                if (item.getType() == Material.IRON_INGOT) {
+                    SkyRanks.getDataFile().set("ranks.default", rank);
+                    p.closeInventory();
+                    new GuiRanks(p, 1);
                 }
             }
             e.setCancelled(true);

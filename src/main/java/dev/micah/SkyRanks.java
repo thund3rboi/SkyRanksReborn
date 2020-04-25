@@ -6,6 +6,7 @@ import dev.micah.io.FileManager;
 import dev.micah.listeners.ChatListener;
 import dev.micah.listeners.GuiListener;
 import dev.micah.listeners.JoinListener;
+import dev.micah.runnable.PermissionCheckRunnable;
 import dev.micah.runnable.TablistRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -45,6 +46,9 @@ public final class SkyRanks extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
         /** Runnables **/
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new TablistRunnable(), 1L, 1L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new PermissionCheckRunnable(), 1L, 1L);
+        /** Other **/
+        FileManager.loadPremadeFile();
     }
 
     @Override

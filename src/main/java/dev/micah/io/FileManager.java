@@ -51,7 +51,6 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
-        this.loadPremadeFile();
         System.out.println("[SkyRanks] Successfully loaded " + name + ".yml!");
     }
 
