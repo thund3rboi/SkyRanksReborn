@@ -1,11 +1,14 @@
 package dev.micah;
 
+import dev.micah.api.SkyRanksAPI;
 import dev.micah.command.SkyRanksCommand;
 import dev.micah.command.VanishCommand;
 import dev.micah.io.FileManager;
 import dev.micah.listeners.ChatListener;
 import dev.micah.listeners.GuiListener;
 import dev.micah.listeners.JoinListener;
+import dev.micah.mysql.MySQL;
+import dev.micah.mysql.MySQLSetup;
 import dev.micah.runnable.PermissionCheckRunnable;
 import dev.micah.runnable.TablistRunnable;
 import org.bukkit.Bukkit;
@@ -21,17 +24,21 @@ import java.io.IOException;
 
 public final class SkyRanks extends JavaPlugin {
 
-    //instances
+    /** Instances **/
     private static SkyRanks instance;
     private FileManager fileManager;
     private YamlConfiguration config;
     private File dataFile;
 
+    /** Variables **/
+    public static boolean mysql;
 
     @Override
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
+        /** MySQL **/
+        if (getConfig().getBoolean("mysql.use")) { this.mysql = new MySQLSetup(MySQL.host(), MySQL.database(), MySQL.username(), MySQL.password(), MySQL.port()).connect(); }
         /** File Management Init **/
         dataFile = new File(Bukkit.getPluginManager().getPlugin("SkyRanks").getDataFolder(), "data.yml");
         fileManager = new FileManager(dataFile, "data");
