@@ -1,6 +1,7 @@
 package dev.micah.rank;
 
 import dev.micah.SkyRanks;
+import dev.micah.api.event.RankDeletedEvent;
 import dev.micah.permissions.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,6 +1,7 @@
 package dev.micah.command;
 
 import dev.micah.SkyRanks;
+import dev.micah.api.event.RankCreatedEvent;
 import dev.micah.gui.impl.GuiEditor;
 import dev.micah.gui.impl.GuiRanks;
 import dev.micah.gui.impl.GuiSetRank;
@@ -51,6 +52,7 @@ public class SkyRanksCommand implements CommandExecutor {
                         p.sendMessage("&cA rank with that name already exists!");
                     } else {
                         Rank.createRank(rankToCreate);
+                        new RankCreatedEvent(playerIn, rankToCreate);
                         p.sendMessage("&cCreated the rank &7" + rankToCreate);
                     }
                 }

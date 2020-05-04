@@ -54,7 +54,7 @@ public class SkyRanksAPI {
      * @param colorCode The color code
      */
 
-    public void setChatCode(String rank, String colorCode) {
+    public void setChatColor(String rank, String colorCode) {
         Rank.setChatColor(rank, colorCode);
     }
 

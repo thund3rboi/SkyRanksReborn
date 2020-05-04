@@ -1,6 +1,8 @@
 package dev.micah.listeners;
 
 import dev.micah.SkyRanks;
+import dev.micah.api.event.RankDeletedEvent;
+import dev.micah.api.event.RankSetEvent;
 import dev.micah.conversation.ConversationHandler;
 import dev.micah.gui.impl.GuiColorSelector;
 import dev.micah.gui.impl.GuiEditor;
@@ -45,6 +47,7 @@ public class GuiListener implements Listener {
                 if (item.getType() == Material.LAVA_BUCKET) {
                     Rank.deleteRank(rank);
                     p.closeInventory();
+                    new RankDeletedEvent(p, rank);
                     new PlayerUtil(p).sendMessage("&cYou deleted the rank &7" + rank);
                 }
                 if (item.getType() == Material.BARRIER) {
@@ -97,8 +100,12 @@ public class GuiListener implements Listener {
             String rank = ChatColor.stripColor(item.getItemMeta().getDisplayName());
             Rank.setRank(Bukkit.getOfflinePlayer(playerName).getPlayer(), rank);
             p.closeInventory();
+            new RankSetEvent((Player)e.getWhoClicked(), Bukkit.getPlayer(playerName), rank);
             new PlayerUtil(p).sendMessage("&cYou changed &7" + playerName + "&c's rank to &7" + rank);
             e.setCancelled(true);
+        }
+        if (e.getInventory().getTitle().equals(Chat.color("&c&lSKYRANKS - Nick"))) {
+            //TODO Nick Listener
         }
     }
 
