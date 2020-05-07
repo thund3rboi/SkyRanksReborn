@@ -62,6 +62,7 @@ public class SkyRanksAPI {
      * @param rank The name of the rank
      * @param colorCode The color code
      */
+    
     public void setNameColor(String rank, String colorCode) {
         Rank.setNameColor(rank, colorCode);
     }
