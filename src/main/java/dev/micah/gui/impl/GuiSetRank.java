@@ -55,6 +55,7 @@ public class GuiSetRank extends Gui {
         lore.add(Chat.color("&c- &7Suffix: &r" + (Rank.getSuffix(rank) == null ? "&fNONE" : Rank.getSuffix(rank))));
         lore.add(Chat.color("&c- &7Chat Color: &r" + Rank.getChatColor(rank) + "THIS"));
         lore.add(Chat.color("&c- &7Name Color: &r" + Rank.getNameColor(rank) + "THIS"));
+        lore.add(Chat.color("&c- &7Nickable: &r" + (Rank.isNickable(rank) ? "&aYES" : "&cNO")));
         lore.add("  ");
         lore.add(Chat.color("&cClick to change &7" + player.getName() + "'s rank to &7" + rank));
         meta.setLore(lore);

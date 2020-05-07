@@ -54,6 +54,7 @@ public class GuiRanks extends Gui {
         lore.add(Chat.color("&c- &7Suffix: &r" + (Rank.getSuffix(rank) == null ? "&fNONE" : Rank.getSuffix(rank))));
         lore.add(Chat.color("&c- &7Chat Color: &r" + Rank.getChatColor(rank) + "THIS"));
         lore.add(Chat.color("&c- &7Name Color: &r" + Rank.getNameColor(rank) + "THIS"));
+        lore.add(Chat.color("&c- &7Nickable: &r" + (Rank.isNickable(rank) ? "&aYES" : "&cNO")));
         if (player.hasPermission("skyranks.admin.editor")) {
             if (SkyRanks.getDataFile().getString("ranks.default").equals(rank)) {
                 lore.add(Chat.color("&cThis is the default rank"));

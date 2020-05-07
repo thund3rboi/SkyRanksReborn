@@ -1,10 +1,13 @@
 package dev.micah;
 
 import dev.micah.api.SkyRanksAPI;
+import dev.micah.command.BetaCommand;
+import dev.micah.command.NickCommand;
 import dev.micah.command.SkyRanksCommand;
 import dev.micah.command.VanishCommand;
 import dev.micah.io.FileManager;
 import dev.micah.listeners.ChatListener;
+import dev.micah.listeners.DeveloperListener;
 import dev.micah.listeners.GuiListener;
 import dev.micah.listeners.JoinListener;
 import dev.micah.mysql.MySQL;
@@ -47,10 +50,13 @@ public final class SkyRanks extends JavaPlugin {
         /** Commands **/
         this.getCommand("skyranks").setExecutor(new SkyRanksCommand());
         this.getCommand("vanish").setExecutor(new VanishCommand());
+        this.getCommand("nick").setExecutor(new NickCommand());
+        this.getCommand("skyranksbeta").setExecutor(new BetaCommand());
         /** Events **/
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
+        Bukkit.getPluginManager().registerEvents(new DeveloperListener(), this);
         /** Runnables **/
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new TablistRunnable(), 1L, 1L);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new PermissionCheckRunnable(), 1L, 1L);

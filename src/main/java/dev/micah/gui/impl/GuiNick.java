@@ -28,7 +28,9 @@ public class GuiNick extends Gui {
         this.ranks = SkyRanks.getDataFile().getStringList("ranks.list");
         List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < ranks.size(); i++) {
-            items.add(createRankItem(ranks.get(i)));
+            if (Rank.isNickable(ranks.get(i))) {
+                items.add(createRankItem(ranks.get(i)));
+            }
         }
         ItemStack left;
         ItemStack right;
@@ -39,6 +41,7 @@ public class GuiNick extends Gui {
         for (ItemStack item : Page.getPageItems(items, page, 14)) {
             gui.setItem(gui.firstEmpty(), item);
         }
+        gui.setItem(35, build("&cRemove Nick", Material.BARRIER));
         gui.setItem(0, build("&aPage " + page, Material.PAPER));
         player.openInventory(gui);
     }

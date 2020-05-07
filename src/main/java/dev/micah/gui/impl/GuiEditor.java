@@ -42,6 +42,7 @@ public class GuiEditor extends Gui {
         gui.setItem(25, build("&c&lDELETE RANK", Material.LAVA_BUCKET));
         gui.setItem(12, build("&cAdd Permission", Material.ANVIL));
         gui.setItem(21, build("&cRemove Permission", Material.ANVIL));
+        gui.setItem(22, build("&cToggle Nickable", Material.NAME_TAG));
         gui.setItem(gui.firstEmpty(), build("&cMake Default", Material.IRON_INGOT));
         gui.setItem(35, build("&cBack", Material.BARRIER));
     }
@@ -57,6 +58,7 @@ public class GuiEditor extends Gui {
         lore.add(Chat.color("&c- &7Suffix: &r" + (Rank.getSuffix(rank) == null ? "&fNONE" : Rank.getSuffix(rank))));
         lore.add(Chat.color("&c- &7Chat Color: &r" + Rank.getChatColor(rank) + "THIS"));
         lore.add(Chat.color("&c- &7Name Color: &r" + Rank.getNameColor(rank) + "THIS"));
+        lore.add(Chat.color("&c- &7Nickable: &r" + (Rank.isNickable(rank) ? "&aYES" : "&cNO")));
         if (SkyRanks.getDataFile().getString("ranks.default").equals(rank)) {
             lore.add(Chat.color("&cThis is the default rank"));
         }

@@ -8,3 +8,8 @@ commands:
   vanish:
     description: Vanish command built into SkyRanks
     aliases: [v, dissapear, hide]
+  nick:
+    description: Nick command built into SkyRanks
+    aliases: [nickname]
+  skyranksbeta:
+    description: BETA Command only for special people

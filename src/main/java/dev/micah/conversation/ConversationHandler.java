@@ -2,6 +2,7 @@ package dev.micah.conversation;
 
 import dev.micah.SkyRanks;
 import dev.micah.gui.impl.GuiEditor;
+import dev.micah.nick.NickHandler;
 import dev.micah.rank.Rank;
 import dev.micah.runnable.PermissionCheckRunnable;
 import dev.micah.utils.Chat;
@@ -35,6 +36,13 @@ public class ConversationHandler {
         p.closeInventory();
         ConversationFactory factory = new ConversationFactory(SkyRanks.getInstance());
         Conversation conversation = factory.withFirstPrompt(new PermissionRemoveA(rankEditing)).withLocalEcho(false).buildConversation(p);
+        conversation.begin();
+    }
+
+    public static void startConversationSetNick(Player p, String rankNicking) {
+        p.closeInventory();
+        ConversationFactory factory = new ConversationFactory(SkyRanks.getInstance());
+        Conversation conversation = factory.withFirstPrompt(new SetNickA(rankNicking)).withLocalEcho(false).buildConversation(p);
         conversation.begin();
     }
 
@@ -109,6 +117,24 @@ class PermissionRemoveA extends StringPrompt {
         Rank.removePermission(rank, input);
         PermissionCheckRunnable.waitListToRemove.put(rank, input);
         new GuiEditor((Player)context.getForWhom(), rank, GuiEditor.getPageComingFrom().get(context.getForWhom()));
+        return null;
+    }
+}
+
+class SetNickA extends StringPrompt {
+
+    private String rank;
+    public SetNickA(String rankNicking) { this.rank = rankNicking; }
+
+    @Override
+    public String getPromptText(ConversationContext context) {
+        return Chat.color("&cPlease type the name you would like to appear as...");
+    }
+
+    @Override
+    public Prompt acceptInput(ConversationContext context, String input) {
+        context.getForWhom().sendRawMessage(Chat.color("&cYou are now nicked!"));
+        NickHandler.nick((Player)context.getForWhom(), input, rank);
         return null;
     }
 }

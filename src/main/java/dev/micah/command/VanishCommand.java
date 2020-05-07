@@ -1,5 +1,7 @@
 package dev.micah.command;
 
+import dev.micah.utils.Chat;
+import dev.micah.utils.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,12 +24,15 @@ public class VanishCommand implements CommandExecutor {
             Player p = (Player) sender;
             boolean vanished = vanishedList.contains(p);
             for (Player all : Bukkit.getOnlinePlayers()) {
+                PlayerUtil util = new PlayerUtil(p);
                 if (vanished) {
                     all.showPlayer(p);
                     vanishedList.remove(p);
+                    util.sendMessage("&cYou are no longer vanished!");
                 } else {
                     all.hidePlayer(p);
                     vanishedList.add(p);
+                    util.sendMessage("&cYou are now vanished!");
                 }
             }
         }

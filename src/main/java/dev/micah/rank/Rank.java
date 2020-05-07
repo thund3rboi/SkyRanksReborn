@@ -32,6 +32,15 @@ public class Rank {
         plugin.save();
     }
 
+    public static void setNickable(String rankName, boolean b) {
+        conf.set("ranks." + rankName + ".inGui", b);
+        plugin.save();
+    }
+
+    public static boolean isNickable(String rankName) {
+        return conf.getBoolean("ranks." + rankName + ".inGui");
+    }
+
     public static List<String> getPermissions(String rankName) {
         return conf.getStringList("ranks." + rankName + ".permissions");
     }
@@ -56,6 +65,7 @@ public class Rank {
     public static void deleteRank(String rankName) {
         conf.set("ranks." + rankName, null);
         ranks.remove(rankName);
+        conf.set("ranks.list", ranks);
         Bukkit.getLogger().info(rankName + " was deleted!");
         plugin.save();
     }

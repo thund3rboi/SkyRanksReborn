@@ -7,6 +7,7 @@ import dev.micah.conversation.ConversationHandler;
 import dev.micah.gui.impl.GuiColorSelector;
 import dev.micah.gui.impl.GuiEditor;
 import dev.micah.gui.impl.GuiRanks;
+import dev.micah.nick.NickHandler;
 import dev.micah.rank.Rank;
 import dev.micah.utils.Chat;
 import dev.micah.utils.PlayerUtil;
@@ -52,6 +53,12 @@ public class GuiListener implements Listener {
                 }
                 if (item.getType() == Material.BARRIER) {
                     new GuiRanks(p, GuiEditor.getPageComingFrom().get(p));
+                }
+                if (item.getType() == Material.NAME_TAG) {
+                    if (item.getItemMeta().getDisplayName().contains("Toggle")) {
+                        Rank.setNickable(rank, !Rank.isNickable(rank));
+                        new GuiEditor(p, rank, GuiEditor.getPageComingFrom().get(p));
+                    }
                 }
                 if (item.getType() == Material.BOOK_AND_QUILL) {
                     if (item.getItemMeta().getDisplayName().contains("Edit Prefix")) {
@@ -105,7 +112,18 @@ public class GuiListener implements Listener {
             e.setCancelled(true);
         }
         if (e.getInventory().getTitle().equals(Chat.color("&c&lSKYRANKS - Nick"))) {
-            //TODO Nick Listener
+            String rank = ChatColor.stripColor(item.getItemMeta().getDisplayName());
+            if (item != null && item.getType() != null) {
+                if (item.getType() == Material.NAME_TAG) {
+                    ConversationHandler.startConversationSetNick(p, rank);
+                }
+                if (item.getType() == Material.BARRIER) {
+                    p.closeInventory();
+                    NickHandler.reset(p);
+                    new PlayerUtil(p).sendMessage("&cYou have disabled nick!");
+                }
+            }
+            e.setCancelled(true);
         }
     }
 

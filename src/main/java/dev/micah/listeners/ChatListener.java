@@ -1,5 +1,6 @@
 package dev.micah.listeners;
 
+import dev.micah.nick.NickHandler;
 import dev.micah.rank.Rank;
 import dev.micah.utils.Chat;
 import org.bukkit.Bukkit;
@@ -20,10 +21,10 @@ public class ChatListener implements Listener {
             boolean completed = false;
             if (Rank.getPrefix(rank) != null) { prefix = true; }
             if (Rank.getSuffix(rank) != null) { suffix = true; }
-            if (suffix && prefix) { all.sendMessage(Chat.color(Rank.getPrefix(rank) + " &r" + Rank.getNameColor(rank) + p.getName() + " " + Rank.getSuffix(rank) + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
-            if (prefix && !suffix) { all.sendMessage(Chat.color(Rank.getPrefix(rank) + " &r" + Rank.getNameColor(rank) + p.getName() + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
-            if (suffix && !prefix) { all.sendMessage(Chat.color(p.getName() + " " + Rank.getSuffix(rank) + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
-            if (!completed) { all.sendMessage(p.getName() + ": " + e.getMessage()); }
+            if (suffix && prefix) { all.sendMessage(Chat.color(Rank.getPrefix(rank) + " &r" + Rank.getNameColor(rank) + NickHandler.see(e.getPlayer()) + " " + Rank.getSuffix(rank) + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
+            if (prefix && !suffix) { all.sendMessage(Chat.color(Rank.getPrefix(rank) + " &r" + Rank.getNameColor(rank) + NickHandler.see(e.getPlayer()) + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
+            if (suffix && !prefix) { all.sendMessage(Chat.color(NickHandler.see(e.getPlayer()) + " " + Rank.getSuffix(rank) + "&r: " + Rank.getChatColor(rank) + e.getMessage()));completed = true; }
+            if (!completed) { all.sendMessage(NickHandler.see(e.getPlayer()) + ": " + e.getMessage()); }
         }
         e.setCancelled(true);
     }
